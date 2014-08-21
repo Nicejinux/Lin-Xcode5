@@ -30,7 +30,7 @@ static NSString * const kLNPopoverWindowToolbarSearchFieldIdentifier = @"Search"
                                                                         styleMask:(NSTitledWindowMask | NSClosableWindowMask | NSResizableWindowMask)
                                                                           backing:NSBackingStoreBuffered
                                                                             defer:NO];
-    popoverWindow.title = @"Lin";
+    popoverWindow.title = @"i18n";
     popoverWindow.level = NSFloatingWindowLevel;
     popoverWindow.backgroundColor = [NSColor whiteColor];
     [popoverWindow.contentView setAutoresizesSubviews:YES];

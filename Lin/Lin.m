@@ -36,6 +36,8 @@
 #import "LNPopoverWindowController.h"
 #import "LNLocalizedStringCollectionOperation.h"
 
+#define I18N_MENU_NAME      @"i18n Popup"
+
 static Lin *_sharedPlugin = nil;
 
 @interface NSPopover ()
@@ -423,17 +425,18 @@ static Lin *_sharedPlugin = nil;
 {
     NSMenuItem *editorMenuItem = [[NSApp mainMenu] itemWithTitle:@"Editor"];
     
-    if (editorMenuItem && [[editorMenuItem submenu] itemWithTitle:@"Lin"] == nil) {
+    if (editorMenuItem && [[editorMenuItem submenu] itemWithTitle:I18N_MENU_NAME] == nil) {
         // Load defaults
         BOOL enabled = [[LNUserDefaultsManager sharedManager] isEnabled];
         
-        NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:@"Lin" action:NULL keyEquivalent:@""];
+        NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:I18N_MENU_NAME action:NULL keyEquivalent:@""];
         
-        NSMenu *submenu = [[NSMenu alloc] initWithTitle:@"Lin"];
+        NSMenu *submenu = [[NSMenu alloc] initWithTitle:I18N_MENU_NAME];
         menuItem.submenu = submenu;
         
         // Enable Lin
-        NSMenuItem *enableMenuItem = [[NSMenuItem alloc] initWithTitle:@"Enable Lin" action:@selector(toggleEnabled:) keyEquivalent:@""];
+        NSString *title = [NSString stringWithFormat:@"Enable %@", I18N_MENU_NAME];
+        NSMenuItem *enableMenuItem = [[NSMenuItem alloc] initWithTitle:title action:@selector(toggleEnabled:) keyEquivalent:@""];
         [enableMenuItem setTarget:self];
         enableMenuItem.state = enabled ? NSOnState : NSOffState;
         
@@ -506,7 +509,7 @@ static Lin *_sharedPlugin = nil;
 {
     // Create alert
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Lin"
+    NSAlert *alert = [NSAlert alertWithMessageText:I18N_MENU_NAME
                                      defaultButton:@"OK"
                                    alternateButton:nil
                                        otherButton:@"Open Website"
